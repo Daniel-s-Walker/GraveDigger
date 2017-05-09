@@ -1,2 +1,56 @@
- swag
-test
+import javax.swing.*;
+import java.awt.*;
+import java.awt.image.*;
+import javax.imageio.*;
+import java.io.*;
+import java.awt.event.KeyEvent; 
+import java.awt.event.KeyListener; 
+
+public class Game extends JPanel
+{
+   public static void main (String[] args) throws InterruptedException  {
+    JFrame frame = new JFrame("GraveDigger");
+    Game gd = new Game();
+       frame.add(gd);
+    frame.setSize(1280, 1024);
+
+    frame.setVisible(true);
+
+    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    while (true) {
+      //gd.move(); 
+
+      gd.repaint();
+      Thread.sleep(10); 
+    }
+  }
+   
+    public Game()
+  {
+    addKeyListener(new KeyListener() {
+      
+      @Override
+      public void keyTyped(KeyEvent e) {    } 
+      
+      @Override
+      public void keyReleased(KeyEvent e) {     
+   }  
+      
+      @Override    
+      public void keyPressed(KeyEvent e) {
+
+      }
+    });
+    
+    setFocusable(true);
+    }
+    
+    @Override
+public void paint(Graphics g) {
+Graphics2D g2d = (Graphics2D) g;
+super.paint(g);
+g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
+g2d.setColor(new Color (31,38,59));
+g2d.fillRect(0, 0, 1280, 1024);
+    }
+}
