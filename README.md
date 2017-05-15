@@ -1,2 +1,2 @@
 # GraveDigger
-swag bitch
+swag (respect women)
