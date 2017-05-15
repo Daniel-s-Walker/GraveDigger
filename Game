@@ -13,51 +13,55 @@ import java.awt.Toolkit;
 
 public class Game extends JPanel
 {
-   public static void main (String[] args) throws InterruptedException  {
+  
+  private MainMenu menu = new MainMenu(); 
+  
+  public static void main (String[] args) throws InterruptedException  {
     JFrame frame = new JFrame("GraveDigger");
     Game gd = new Game();
-       frame.add(gd);
+    frame.add(gd);
     frame.setSize(1280, 974);
-
+    
     frame.setVisible(true);
-
+    
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     while (true) {
       //gd.move(); 
-
+      
       gd.repaint();
       Thread.sleep(10); 
     }
   }
-   
-    public Game()
+  
+  public Game()
   {
+    
+    
     addKeyListener(new KeyListener() {
       
       @Override
-      public void keyTyped(KeyEvent e) {    } 
+      public void keyTyped(KeyEvent e) {
+      } 
       
       @Override
       public void keyReleased(KeyEvent e) {     
-   }  
+        menu.keyReleased(e);
+      }  
       
       @Override    
       public void keyPressed(KeyEvent e) {
-
+        
       }
     });
     
     setFocusable(true);
-    }
+  }
+  
+  @Override
+  public void paint(Graphics g) {
+    Graphics2D g2d = (Graphics2D) g;
     
-    @Override
-public void paint(Graphics g) {
-Graphics2D g2 = (Graphics2D) g;
-super.paint(g);
-
-
-
-Image mainMenu = Toolkit.getDefaultToolkit().getImage("mainMenu.png");
-g2.drawImage(mainMenu, 0,0,1280,974, null);
-    }
+   menu.paint(g2d);
+    
+  }
 }
