@@ -16,6 +16,9 @@ public class Game extends JPanel
   
   private MainMenu menu = new MainMenu(); 
   
+  //declares the shop as the variable s1
+  private shop s1 = new shop(1280, 974);
+  
   public static void main (String[] args) throws InterruptedException  {
     JFrame frame = new JFrame("GraveDigger");
     Game gd = new Game();
@@ -62,6 +65,8 @@ public class Game extends JPanel
     Graphics2D g2d = (Graphics2D) g;
     
    menu.paint(g2d);
+   //paints the shop
+    s1.paint(g);
     
   }
 }
