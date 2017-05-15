@@ -1,0 +1,36 @@
+import java.awt.image.*;
+import java.io.*;
+import javax.imageio.*;
+import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.Toolkit;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+
+public class MainMenu{
+  Image mainMenu = null;
+  
+  public MainMenu(){
+    Image mainMenu = Toolkit.getDefaultToolkit().getImage("mainMenu.png");
+  }
+  
+  public void paint(Graphics g){
+   Graphics2D g2 = (Graphics2D) g;
+Image mainMenu = Toolkit.getDefaultToolkit().getImage("mainMenu.png");
+g2.drawImage(mainMenu, 0,0,1280,974, null); 
+  }
+  
+  
+  public void keyReleased(KeyEvent e){
+    if(e.getKeyCode() == KeyEvent.VK_1){
+      // NEW GAME
+    }
+    if(e.getKeyCode() == KeyEvent.VK_2){
+      // LOAD GAME
+    }
+    if(e.getKeyCode() == KeyEvent.VK_3){
+      // EXIT
+    }
+  }
+}
