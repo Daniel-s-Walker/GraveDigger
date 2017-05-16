@@ -18,6 +18,7 @@ public class Game extends JPanel
   
   //declares the shop as the variable s1
   private shop s1 = new shop(1280, 974);
+  private GraveDigger g1 = new GraveDigger(false,false,500,500, -1,-1);
   
   public static void main (String[] args) throws InterruptedException  {
     JFrame frame = new JFrame("GraveDigger");
@@ -66,7 +67,8 @@ public class Game extends JPanel
     
    menu.paint(g2d);
    //paints the shop
-    s1.paint(g);
+    //s1.paint(g);
+    g1.paint(g);
     
   }
 }
