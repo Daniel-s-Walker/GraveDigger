@@ -19,8 +19,8 @@ public class GraveDigger
   private int y;
   private int xa;
   private int ya;
-  private int height = 50; 
-  private int width = 50;
+  private int height = 64; 
+  private int width = 64;
   
   
   public GraveDigger(boolean hasArmor, boolean hasWand,int x, int y, int xa, int ya)
@@ -37,7 +37,7 @@ public class GraveDigger
 Graphics2D g2 = (Graphics2D) g;
 
 Image GraveDigger = Toolkit.getDefaultToolkit().getImage("GraveDigger.png");
-if (xa == -1) g2.drawImage(GraveDigger, 0,0,50,50, null); //left facing sprite is "default sprite"
-else g2.drawImage(GraveDigger, 0,0,-50,50, null); //flipped left sprite
+if (xa == -1) g2.drawImage(GraveDigger, 0,0,width,height, null); //left facing sprite is "default sprite"
+else g2.drawImage(GraveDigger, 0,0,-width,height, null); //flipped left sprite
     }
 }
