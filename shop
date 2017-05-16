@@ -12,9 +12,17 @@ import java.awt.Image;
 import java.awt.Toolkit;
 
 public class shop extends JPanel{
+  //the x of the white selection box around the items
+  private int selectX = 450;
+  
+  //shows if the selected item is in stock
   private boolean inStock = true;
+  
+  //this is the full shop background image
   private BufferedImage shopImage = null;
-  private int itemType = 0;
+  
+  //shows which item is selected, 1 is armor 2 is potion, 3 is wand
+  private int itemType = 1;
   
   //height and width of window
   private int width = 0;
@@ -28,17 +36,55 @@ public class shop extends JPanel{
       shopImage = ImageIO.read(new File("shop.png"));
     } catch (IOException e) {
     }
-  
+    
   }
   
+  //this currently only moves the white item box back and forth over the items
+  public void keyPressed(KeyEvent e) {
+    if (e.getKeyCode() == KeyEvent.VK_LEFT){
+      
+      //if the selection box is not on the armor it will move one item left
+      if(selectX > 450){
+      //the item selected is moved one box left
+        itemType = itemType - 1;
+        selectX = selectX-200;}
+    }
+    if (e.getKeyCode() == KeyEvent.VK_RIGHT){
+      //if the selection box is not on the wand it will move one item right
+      if(selectX <850){
+        //the item selected is moved one item to the right
+        itemType = itemType +1;
+        selectX = selectX+200;
+      }
+    }
+  }
+  
+  //returns which of the three items is selected in the shop
+  public int shopItemSelected(){
+  return itemType;
+  }
   
   //paints shop
   @Override
   public void paint(Graphics g) {
     Graphics2D g2d = (Graphics2D) g;
+    
+    //this is the gray background
     g2d.setColor(Color.GRAY);
     g2d.fillRect(0,0,1280,974);
+    
+    //this is the shop image made in paint
     g.drawImage(shopImage, 6, 200, null);
+    
+    //WHEN WE CREATE A METHOD THAT RETURNS HOW MUCH GOLD YOU HAVE WE NEED TO PUT IT HERE
+    //getGold();
+    //THE METHOD SHOULD RETURN HOW MUCH THE PERSON HAS THEN DIVIDE IT INTO TENS AND ONES
+    //AFTER DIVIDING IT INTO TENS AND ONES HAVE AN IMAGE VARIABLE FOR TENS AND ONES THEN PAINT CORRESPONDING NUMBERS NEXT TO THE GOLD CIRCLE
+    
+    //this is the white box that surrounds the selectd item
+    g2d.setColor(Color.WHITE);
+    g2d.drawRect(selectX, 225, 150, 150);
+    
     
   }
   public void move(int i){}
