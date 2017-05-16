@@ -50,11 +50,12 @@ public class Game extends JPanel
       @Override
       public void keyReleased(KeyEvent e) {     
         menu.keyReleased(e);
+        
       }  
       
       @Override    
       public void keyPressed(KeyEvent e) {
-        
+        //s1.keyPressed(e);
       }
     });
     
