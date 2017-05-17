@@ -13,12 +13,11 @@ import java.awt.Toolkit;
 
 public class Game extends JPanel
 {
-  
-  private MainMenu menu = new MainMenu(); 
-  
-  //declares the shop as the variable s1
-  private shop s1 = new shop(1280, 974);
-  private GraveDigger g1 = new GraveDigger(false,false,500,500, -1,-1);
+  //menu
+  private MainMenu menu = new MainMenu(this); 
+  //level
+  private Level l1 = new Level();
+  private boolean levelOn = false;
   
   public static void main (String[] args) throws InterruptedException  {
     JFrame frame = new JFrame("GraveDigger");
@@ -48,28 +47,37 @@ public class Game extends JPanel
       } 
       
       @Override
-      public void keyReleased(KeyEvent e) {     
-        menu.keyReleased(e);
-        
+      public void keyReleased(KeyEvent e) {
+        if(menu.getMenuOn())
+          menu.keyReleased(e);
       }  
       
       @Override    
       public void keyPressed(KeyEvent e) {
-        //s1.keyPressed(e);
+        
       }
     });
     
     setFocusable(true);
   }
   
+  public void setLevelOn(boolean a){
+    levelOn =  a;
+    System.out.println("game.setlevelon works");
+  }
+  
+  public boolean getLevelOn(){
+    return levelOn; 
+  }
+  
   @Override
   public void paint(Graphics g) {
     Graphics2D g2d = (Graphics2D) g;
+    super.paint(g);
     
-   menu.paint(g2d);
-   //paints the shop
-    //s1.paint(g);
-    g1.paint(g);
-    
+    if(levelOn)
+      l1.paint(g2d);
+    if(menu.getMenuOn())
+      menu.paint(g2d);
   }
 }
