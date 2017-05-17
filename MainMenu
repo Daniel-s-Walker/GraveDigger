@@ -9,11 +9,24 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 
 public class MainMenu{
-  Image mainMenu = null;
+  private Image mainMenu = null;
+  private boolean menuOn = true;
+  private Game game;
   
-  public MainMenu(){
+  
+  public MainMenu(Game game){
     Image mainMenu = Toolkit.getDefaultToolkit().getImage("mainMenu.png");
+    this.game = game;
   }
+  
+    public void setMenuOn(boolean a){
+   menuOn =  a;
+  }
+  
+  public boolean getMenuOn(){
+   return menuOn; 
+  }
+  
   
   public void paint(Graphics g){
    Graphics2D g2 = (Graphics2D) g;
@@ -25,6 +38,8 @@ g2.drawImage(mainMenu, 0,0,1280,974, null);
   public void keyReleased(KeyEvent e){
     if(e.getKeyCode() == KeyEvent.VK_1){
       // NEW GAME
+      game.setLevelOn(true);
+      menuOn = false;
     }
     if(e.getKeyCode() == KeyEvent.VK_2){
       // LOAD GAME
