@@ -35,7 +35,6 @@ public class Level{
     levelLayout[1][6] = 2;
   }
   
-  
   public void paint(Graphics g){
     Graphics2D g2d = (Graphics2D) g;
     x = 0;
@@ -47,17 +46,14 @@ public class Level{
     for(int i = 0; i < xL; i++){
       for(int z = 0; z < yL; z++){
         if(levelLayout[i][z] == 1){
-          System.out.println("1 work");
           g2d.setColor(Color.GREEN);
           g2d.fillRect(x,y,width,height);
         }
         if(levelLayout[i][z] == 2){
-          System.out.println("2 work");
           g2d.setColor(new Color(61,28,0));
           g2d.fillRect(x,y,width,height);
         }
         if(levelLayout[i][z] == 3){
-          System.out.println("3 work");
           g2d.setColor(Color.GRAY);
           g2d.fillRect(x,y,width,height);
         }
