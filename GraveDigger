@@ -26,6 +26,7 @@ public class GraveDigger
   public GraveDigger(boolean hasArmor, boolean hasWand,int x, int y, int xa, int ya)
   {
     this.hasArmor = hasArmor;
+    
     this.hasWand = hasWand;
     this.x = x;
     this.y = y;
