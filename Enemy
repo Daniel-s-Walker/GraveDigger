@@ -17,8 +17,8 @@ public abstract class Enemy
   private int y;
   private int xa;
   private int ya;
-  private int width;
-  private int height;
+  private int width = 64;
+  private int height = 64;
   private Image sprite;
   
   public Enemy(int x, int y, int width, int height) 
@@ -30,6 +30,8 @@ public abstract class Enemy
     this.width = width;
     this.height = height;
   }
+  
+
   
   
   public void paint(Graphics g) {
