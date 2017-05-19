@@ -18,19 +18,20 @@ public class Game extends JPanel
   //level
   private Level l1 = new Level();
   private boolean levelOn = false;
+  //gravedigger
+  private GraveDigger g1 = new GraveDigger(false, false, 0, 96, 0, 0, this);
   
   public static void main (String[] args) throws InterruptedException  {
     JFrame frame = new JFrame("GraveDigger");
     Game gd = new Game();
     frame.add(gd);
-    frame.setSize(1280, 974);
+    frame.setSize(1280, 960);
     
     frame.setVisible(true);
     
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     while (true) {
-      //gd.move(); 
-      
+      gd.move(); 
       gd.repaint();
       Thread.sleep(10); 
     }
@@ -50,11 +51,12 @@ public class Game extends JPanel
       public void keyReleased(KeyEvent e) {
         if(menu.getMenuOn())
           menu.keyReleased(e);
+        g1.keyReleased(e);
       }  
       
       @Override    
       public void keyPressed(KeyEvent e) {
-        
+        g1.keyPressed(e);
       }
     });
     
@@ -79,5 +81,13 @@ public class Game extends JPanel
       l1.paint(g2d);
     if(menu.getMenuOn())
       menu.paint(g2d);
+    if(levelOn)
+      g1.paint(g2d);
+  }
+  
+  public void move(){
+    if(levelOn){
+      g1.move(); 
+    }
   }
 }
