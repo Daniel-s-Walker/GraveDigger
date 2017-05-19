@@ -21,9 +21,10 @@ public class GraveDigger
   private int ya;
   private int height = 64; 
   private int width = 64;
+  private Game game;
   
   
-  public GraveDigger(boolean hasArmor, boolean hasWand,int x, int y, int xa, int ya)
+  public GraveDigger(boolean hasArmor, boolean hasWand,int x, int y, int xa, int ya, Game game)
   {
     this.hasArmor = hasArmor;
     
@@ -32,13 +33,54 @@ public class GraveDigger
     this.y = y;
     this.xa = xa;
     this.ya = ya;
+    
+    this.game = game;
   }
   
-  public void paint(Graphics g) {
-Graphics2D g2 = (Graphics2D) g;
-
-Image GraveDigger = Toolkit.getDefaultToolkit().getImage("GraveDigger.png");
-if (xa == -1) g2.drawImage(GraveDigger, 0,0,width,height, null); //left facing sprite is "default sprite"
-else g2.drawImage(GraveDigger, 0,0,-width,height, null); //flipped left sprite
+  public void move(){
+    if ((x + xa <0) || (x + xa > (1280 - width) ))
+      xa *= -1;
+    if ((y + ya <96) || (y + ya > (960) ))
+      ya *= -1;
+    x= x+xa;
+    y= y+ya;
+  }
+  
+  public void keyPressed(KeyEvent e){
+    //only allows movement in one direction at a time
+    if (e.getKeyCode() == KeyEvent.VK_A)
+    {
+      if(ya == 0){
+      xa = -1;
+      }
     }
+    if (e.getKeyCode() == KeyEvent.VK_D)
+    {
+      if(ya == 0){
+      xa = 1;
+      }
+    }
+    if (e.getKeyCode() == KeyEvent.VK_W)
+    {
+      if(xa ==0){
+      ya = -1;
+      }
+    }
+    if (e.getKeyCode() == KeyEvent.VK_S)
+      if(xa == 0){
+      ya = 1;
+    }
+  }
+  
+  public void keyReleased(KeyEvent e){
+    xa = 0;
+    ya = 0;
+  }
+  
+  public void paint(Graphics g){
+    Graphics2D g2 = (Graphics2D) g;
+    Image graveDigger = Toolkit.getDefaultToolkit().getImage("GraveDigger.png");
+    if (xa == -1) g2.drawImage(graveDigger, x,y-height,width,height, null); //left facing sprite is "default sprite"
+    else g2.drawImage(graveDigger, x+width,y-height,-width,height, null); //flipped left sprite
+  }
 }
