@@ -33,11 +33,36 @@ public class Level{
     levelLayout[1][4] = 2;
     levelLayout[1][5] = 2;
     levelLayout[1][6] = 2;
+    try
+ {
+ //Create a new instance of the FileReader and pass it the
+ //file that needs to be read
+ FileReader fr = new FileReader("text.txt");
+ //Create a new instance of the BufferedReader and
+ //add the FileReader to it
+ BufferedReader br = new BufferedReader(fr);
+ //A string variable that will temporarily what you’re reading
+ String line;
+ //A dual purpose line! First it reads the next line and then
+ //it checks to see if that line was null. If it’s null, then
+ //that means you’re at the end of the file.
+ while ((line=br.readLine()) != null)
+ {
+ //PUT THE LOOP THAT PRINTS THE LEVEL HERE
+ }
+ //close the file when you’re done
+ br.close();
+ }
+ catch(IOException e)
+ {
+ //Error message
+ }
   }
   
   public void paint(Graphics g){
     Graphics2D g2d = (Graphics2D) g;
     x = 0;
+    //sky ends after y value
     y = 96;
     g2d.setColor(Color.BLACK);
     g2d.fillRect(0,0,1280,974);
