@@ -19,7 +19,8 @@ public class Game extends JPanel
   private Level l1 = new Level();
   private boolean levelOn = false;
   //gravedigger
-  private GraveDigger g1 = new GraveDigger(false, false, 0, 96, 0, 0, this);
+  private GraveDigger g1 = new GraveDigger(false, false, 0, 78, 0, 0, this);
+  private Skeleton s1 = new Skeleton(0,200,0,0,this);
   
   public static void main (String[] args) throws InterruptedException  {
     JFrame frame = new JFrame("GraveDigger");
@@ -78,11 +79,14 @@ public class Game extends JPanel
     super.paint(g);
     
     if(levelOn)
-      l1.paint(g2d);
+     l1.paint(g2d);
     if(menu.getMenuOn())
       menu.paint(g2d);
     if(levelOn)
+    {
       g1.paint(g2d);
+      s1.paint(g2d);
+    }
   }
   
   public void move(){
@@ -91,3 +95,4 @@ public class Game extends JPanel
     }
   }
 }
+
