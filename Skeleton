@@ -13,27 +13,23 @@ import java.awt.Toolkit;
 
 public class Skeleton extends Enemy
 {
-  private int x;
-  private int y;
-  private int xa = 1;
-  private int ya = 1;
-    
-  public Skeleton(int x, int y, int width, int height) {
-    this.x= x;
-    this.y = y;
-    super(width,height);
-    Image sprite = Toolkit.getDefaultToolkit().getImage("Skeleton.png");
 
+
+  
+    
+  public Skeleton(int x, int y, int xa, int ya, Game game) {
+    super(x,y,xa,ya);
+    
   }
   
 
   public void paint(Graphics g)
   {
     Graphics2D g2 = (Graphics2D) g;
-    super.paint(g);
+    System.out.println(y);
+    Image sprite = Toolkit.getDefaultToolkit().getImage("Skeleton.png");
+    if (!flipped) g2.drawImage(sprite, x,y-height,width,height, null); //left facing sprite is "default sprite"
+    else g2.drawImage(sprite, x+width,y-height,-width,height, null); //flipped left sprite
   }
   
-
-
-
 }
