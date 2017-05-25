@@ -13,22 +13,23 @@ import java.awt.Toolkit;
 
 public abstract class Enemy
 {
-  private int x;
-  private int y;
-  private int xa;
-  private int ya;
-  private int width = 64;
-  private int height = 64;
-  private Image sprite;
+  protected int x;
+  protected int y;
+  protected int xa;
+  protected int ya;
+  protected int width = 32;
+  protected int height = 32;
+  protected Image sprite;
+  protected boolean flipped;
+  private Game game;
   
-  public Enemy(int x, int y, int width, int height) 
+  public Enemy(int x, int y,int xa,int ya) 
   {
     this.x = x;
     this.y = y;
     this.xa = xa;
     this.ya = ya;
-    this.width = width;
-    this.height = height;
+
   }
   
 
@@ -36,9 +37,8 @@ public abstract class Enemy
   
   public void paint(Graphics g) {
 Graphics2D g2 = (Graphics2D) g;
+System.out.println("Printing");
 
-if (xa == -1) g2.drawImage(sprite, 0,0,width,height, null); //left facing sprite is "default sprite"
-else g2.drawImage(sprite, 0,0,-width,height, null); //flipped left sprite
     }
 }
   
