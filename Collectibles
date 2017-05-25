@@ -1,0 +1,61 @@
+import java.awt.image.BufferedImage;
+import javax.swing.*;
+import java.awt.*;
+import java.io.*;
+import javax.imageio.*;
+import java.awt.image.*;
+
+
+public class Collectibles{
+  
+  //x and y of the collectible
+  private int x = 0;
+  private int y = 0;
+  private int width = 32;
+  private int height = 32;
+  
+  //coinbag is the coin bag image
+  private BufferedImage coinBag = null;
+  
+  
+  //holds what the item type is
+  private int collectibleType = 0;
+  
+  
+  //tells you if the collectible is picked up
+  private boolean pickedUp = false;
+  
+  
+  public Collectibles(int collectibleType, int x, int y, Game gd){
+    this.collectibleType = collectibleType;
+    this.x = x;
+    this.y= y;
+    
+    
+    //this.gd = gd;
+    
+    try {
+      coinBag = ImageIO.read(new File("coinbag.png"));
+    } catch (IOException e) {
+    }
+  }
+
+  
+  
+  
+ // @Override
+  public void paint(Graphics g) {
+    g.drawImage(coinBag, x, y, null); 
+    
+    
+    
+  
+  
+  }
+  
+  
+  
+  
+  
+  
+}
