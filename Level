@@ -9,83 +9,76 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 
 public class Level{
-  private int width=64;
-  private int height=64;
+  private int width=32;
+  private int height=32;
   private int x;
   private int y;
-  private int xL = 10;
-  private int yL = 10;
+  private int xL = 400;
+  private int yL = 290;
   private int[][] levelLayout;
   
   public Level(){
     levelLayout = new int[xL][yL];
-    levelLayout[0][0] = 1;
-    levelLayout[0][1] = 1;
-    levelLayout[0][2] = 2;
-    levelLayout[0][3] = 2;
-    levelLayout[0][4] = 2;
-    levelLayout[0][5] = 2;
-    levelLayout[0][6] = 2;
-    levelLayout[1][0] = 1;
-    levelLayout[1][1] = 1;
-    levelLayout[1][2] = 2;
-    levelLayout[1][3] = 2;
-    levelLayout[1][4] = 2;
-    levelLayout[1][5] = 2;
-    levelLayout[1][6] = 2;
     try
- {
- //Create a new instance of the FileReader and pass it the
- //file that needs to be read
- FileReader fr = new FileReader("text.txt");
- //Create a new instance of the BufferedReader and
- //add the FileReader to it
- BufferedReader br = new BufferedReader(fr);
- //A string variable that will temporarily what you’re reading
- String line;
- //A dual purpose line! First it reads the next line and then
- //it checks to see if that line was null. If it’s null, then
- //that means you’re at the end of the file.
- while ((line=br.readLine()) != null)
- {
- //PUT THE LOOP THAT PRINTS THE LEVEL HERE
- }
- //close the file when you’re done
- br.close();
- }
- catch(IOException e)
- {
- //Error message
- }
+    {
+      //Create a new instance of the FileReader and pass it the
+      //file that needs to be read
+      FileReader fr = new FileReader("level.txt");
+      //Create a new instance of the BufferedReader and
+      //add the FileReader to it
+      BufferedReader br = new BufferedReader(fr);
+      //A string variable that will temporarily what you’re reading
+      String line;
+      //A dual purpose line! First it reads the next line and then
+      //it checks to see if that line was null. If it’s null, then
+      //that means you’re at the end of the file.
+      int yPos = 0;
+      int xPos = 0;
+      while ((line=br.readLine()) != null)
+      {
+        for(int i = 0; i < line.length(); i++){
+          levelLayout[xPos][yPos] = line.charAt(i);
+          xPos++;
+        }
+        yPos++;
+        xPos = 0;
+      }
+      //close the file when you’re done
+      br.close();
+    }
+    catch(IOException e)
+    {
+      //Error message
+    }
   }
   
   public void paint(Graphics g){
     Graphics2D g2d = (Graphics2D) g;
     x = 0;
     //sky ends after y value
-    y = 96;
+    y = 78;
     g2d.setColor(Color.BLACK);
     g2d.fillRect(0,0,1280,974);
     g2d.setColor(Color.BLUE);
-    g2d.fillRect(0,0,1280,96);
+    g2d.fillRect(0,0,1280,78);
     for(int i = 0; i < xL; i++){
       for(int z = 0; z < yL; z++){
-        if(levelLayout[i][z] == 1){
+        if(levelLayout[i][z] == 'g'){
           g2d.setColor(Color.GREEN);
           g2d.fillRect(x,y,width,height);
         }
-        if(levelLayout[i][z] == 2){
+        if(levelLayout[i][z] == 'd'){
           g2d.setColor(new Color(61,28,0));
           g2d.fillRect(x,y,width,height);
         }
-        if(levelLayout[i][z] == 3){
+        if(levelLayout[i][z] == 'r'){
           g2d.setColor(Color.GRAY);
           g2d.fillRect(x,y,width,height);
         }
         y = y + height;
       }
       x = x + width;
-      y = 96;
+      y = 78;
     }
   }
 }
