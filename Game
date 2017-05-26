@@ -38,6 +38,16 @@ public class Game extends JPanel
     }
   }
   
+  //returns the current x coordinate of the player
+  public int getPlayerX(){
+    return g1.getPlayerX();
+  }
+  
+  //returns the current y coordinate of the player
+  public int getPlayerY(){
+    return g1.getPlayerY();
+  }
+  
   public Game()
   {
     
