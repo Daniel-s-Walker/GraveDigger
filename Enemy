@@ -26,12 +26,12 @@ public abstract class Enemy
   private int playerY = 0;
   
   
-  public Enemy(int x, int y,int xa,int ya) 
+  public Enemy(int x, int y) 
   {
     this.x = x;
     this.y = y;
-    this.xa = xa;
-    this.ya = ya;
+
+  }
 
   }
    public void updateTarget(){
