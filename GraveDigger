@@ -37,6 +37,16 @@ public class GraveDigger
     this.game = game;
   }
   
+  //gets the x value of where the grave digger sprite is
+  public int getPlayerX(){
+    return this.y;
+  }
+  
+  //gets the y value of where the grave digger sprite is
+  public int getPlayerY(){
+    return this.x;
+  }
+  
   public void move(){
     if ((x + xa <0) || (x + xa > (1280 - width) ))
       xa *= -1;
