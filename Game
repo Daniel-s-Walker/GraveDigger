@@ -20,7 +20,8 @@ public class Game extends JPanel
   private boolean levelOn = false;
   //gravedigger
   private GraveDigger g1 = new GraveDigger(false, false, 0, 78, 0, 0, this);
-  private Skeleton s1 = new Skeleton(0,200,0,0,this);
+  private Skeleton s1 = new Skeleton(50,200,this);
+  private Ghost gh1 = (new Ghost(300,500,this));
   
   public static void main (String[] args) throws InterruptedException  {
     JFrame frame = new JFrame("GraveDigger");
@@ -96,6 +97,7 @@ public class Game extends JPanel
     {
       g1.paint(g2d);
       s1.paint(g2d);
+      gh1.paint(g2d);
     }
   }
   
