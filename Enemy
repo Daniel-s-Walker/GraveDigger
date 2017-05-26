@@ -31,7 +31,11 @@ public abstract class Enemy
     this.ya = ya;
 
   }
-  
+   public void updateTarget(){
+    //has to go through game
+   playerX = game.getPlayerX();
+   playerY = game.getPlayerY();
+  }  
 
   
   
