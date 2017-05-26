@@ -11,7 +11,7 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Toolkit;
 
-public class shop extends JPanel{
+public class Shop extends JPanel{
   private int armorCost = 10;
   private int potionCost = 10;
   private int wandCost = 10;
@@ -48,7 +48,7 @@ public class shop extends JPanel{
   private int height = 0;
   
   //shop takes a width and height value that should be the window size
-  public shop(int width, int height, Game game){
+  public Shop(int width, int height, Game game){
     this.game = game;
     this.width = width;
     this.height = height;
