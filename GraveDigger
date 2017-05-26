@@ -47,33 +47,54 @@ public class GraveDigger
     return this.x;
   }
   
-  public void move(){
+   public void move(){
     if ((x + xa <0) || (x + xa > (1280 - width) ))
       xa *= -1;
-    if ((y + ya <96) || (y + ya > (960) ))
+    if ((y + ya <78) || (y + ya > (960) ))
       ya *= -1;
+    
+    if((x%32 != 0)){
+      if(movingLeft){
+        xa = -1; 
+      }
+      if(movingRight){
+        xa = 1; 
+      }
+    }
+    else if(x%32 == 0){
+      if(movingLeft){
+      movingLeft = false;
+      xa = 0;
+      ya = 0;
+      }
+      if(movingRight){
+      movingRight = false;
+      xa=0;
+      ya=0;
+      }
+    }
     x= x+xa;
     y= y+ya;
   }
   
-  public void keyPressed(KeyEvent e){
+    public void keyPressed(KeyEvent e){
     //only allows movement in one direction at a time
     if (e.getKeyCode() == KeyEvent.VK_A)
     {
       if(ya == 0){
-      xa = -1;
+        xa = -1;
       }
     }
     if (e.getKeyCode() == KeyEvent.VK_D)
     {
       if(ya == 0){
-      xa = 1;
+        xa = 1;
       }
     }
     if (e.getKeyCode() == KeyEvent.VK_W)
     {
       if(xa ==0){
-      ya = -1;
+        ya = -1;
       }
     }
     if (e.getKeyCode() == KeyEvent.VK_S)
@@ -83,6 +104,11 @@ public class GraveDigger
   }
   
   public void keyReleased(KeyEvent e){
+    if(xa == -1)
+      movingLeft = true;
+    if(xa == 1)
+      movingRight = true;
+    
     xa = 0;
     ya = 0;
   }
