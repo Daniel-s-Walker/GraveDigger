@@ -56,11 +56,11 @@ public class Level{
     Graphics2D g2d = (Graphics2D) g;
     x = 0;
     //sky ends after y value
-    y = 78;
+    y = 64;
     g2d.setColor(Color.BLACK);
-    g2d.fillRect(0,0,1280,974);
+    g2d.fillRect(0,0,1280,960);
     g2d.setColor(Color.BLUE);
-    g2d.fillRect(0,0,1280,78);
+    g2d.fillRect(0,0,1280,64);
     for(int i = 0; i < xL; i++){
       for(int z = 0; z < yL; z++){
         if(levelLayout[i][z] == 'g'){
@@ -78,7 +78,7 @@ public class Level{
         y = y + height;
       }
       x = x + width;
-      y = 78;
+      y = 64;
     }
   }
 }
