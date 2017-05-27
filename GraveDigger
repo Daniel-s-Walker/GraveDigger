@@ -15,12 +15,16 @@ public class GraveDigger
 {
   private boolean hasArmor;
   private boolean hasWand;
+  private boolean movingRight = false;
+  private boolean movingLeft = false;
+  private boolean movingUp = false;
+  private boolean movingDown = false;
   private int x;
   private int y;
   private int xa;
   private int ya;
-  private int height = 64; 
-  private int width = 64;
+  private int height = 32; 
+  private int width = 32;
   private Game game;
   
   
@@ -37,31 +41,31 @@ public class GraveDigger
     this.game = game;
   }
   
-  //gets the x value of where the grave digger sprite is
-  public int getPlayerX(){
-    return this.y;
-  }
-  
-  //gets the y value of where the grave digger sprite is
-  public int getPlayerY(){
-    return this.x;
-  }
-  
-   public void move(){
+  public void move(){
     if ((x + xa <0) || (x + xa > (1280 - width) ))
       xa *= -1;
-    if ((y + ya <78) || (y + ya > (960) ))
+    if ((y + ya <64) || (y + ya > (960) ))
       ya *= -1;
     
-    if((x%32 != 0)){
+    if((x%32 != 0) || (y)%32 !=0){
       if(movingLeft){
-        xa = -1; 
+        xa = -1;
+        ya = 0;
       }
       if(movingRight){
-        xa = 1; 
+        xa = 1;
+        ya = 0;
+      }
+      if(movingUp){
+       ya = -1;
+       xa = 0;
+      }
+      if(movingDown){
+       ya = 1;
+       xa = 0;
       }
     }
-    else if(x%32 == 0){
+    else if((x%32 == 0) || (y)%32 ==0){
       if(movingLeft){
       movingLeft = false;
       xa = 0;
@@ -72,12 +76,22 @@ public class GraveDigger
       xa=0;
       ya=0;
       }
+      if(movingUp){
+      movingUp = false;
+      xa=0;
+      ya=0;
+      }
+      if(movingDown){
+      movingDown = false;
+      xa=0;
+      ya=0;
+      }
     }
     x= x+xa;
     y= y+ya;
   }
   
-    public void keyPressed(KeyEvent e){
+  public void keyPressed(KeyEvent e){
     //only allows movement in one direction at a time
     if (e.getKeyCode() == KeyEvent.VK_A)
     {
@@ -108,6 +122,10 @@ public class GraveDigger
       movingLeft = true;
     if(xa == 1)
       movingRight = true;
+    if(ya == 1)
+      movingDown = true;
+    if(ya == -1)
+      movingUp = true;
     
     xa = 0;
     ya = 0;
