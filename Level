@@ -13,8 +13,8 @@ public class Level{
   private int height=32;
   private int x;
   private int y;
-  private int xL = 400;
-  private int yL = 290;
+  private int xL = 45;
+  private int yL = 38;
   private int[][] levelLayout;
   
   public Level(){
@@ -75,10 +75,22 @@ public class Level{
           g2d.setColor(Color.GRAY);
           g2d.fillRect(x,y,width,height);
         }
+        if(levelLayout[i][z] == 't'){
+         g2d.setColor(Color.BLACK);
+         g2d.fillRect(x,y,width,height);
+        }
         y = y + height;
       }
       x = x + width;
       y = 64;
     }
+  }
+  
+  public int getTile(int x,int y){
+   return levelLayout[x][y]; 
+  }
+  
+  public void setTile(int x, int y, char p){
+   levelLayout[x][y] = p; 
   }
 }
