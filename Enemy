@@ -22,8 +22,8 @@ public abstract class Enemy
   protected Image sprite;
   protected boolean flipped;
   private Game game;
-  private int playerX = 0;
-  private int playerY = 0;
+  protected int playerX = 0;
+  protected int playerY = 0;
   
   
   public Enemy(int x, int y) 
