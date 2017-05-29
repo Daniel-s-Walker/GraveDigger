@@ -19,9 +19,10 @@ public class Game extends JPanel
   private Level l1 = new Level();
   private boolean levelOn = false;
   //gravedigger
-  private GraveDigger g1 = new GraveDigger(false, false, 0, 64, 0, 0, this);
-  private Skeleton s1 = new Skeleton(50,200,this);
-  private Ghost gh1 = (new Ghost(300,500,this));
+  private GraveDigger g1 = new GraveDigger(false, false, 0, 64, 0, 0, this, l1);
+  private Skeleton s1 = new Skeleton(32*2,32*6,0,0,this);
+  private Ghost gh1 =(new Ghost(32*3,32*6,0,0,this));
+  private Ghoul gho1 = new Ghoul(32*5,32*10,0,0,this);
   
   public static void main (String[] args) throws InterruptedException  {
     JFrame frame = new JFrame("GraveDigger");
@@ -40,14 +41,14 @@ public class Game extends JPanel
   }
   
   //returns the current x coordinate of the player
-  public int getPlayerX(){
-    return g1.getPlayerX();
-  }
+  //public int getPlayerX(){
+   // return g1.getPlayerX();
+  //}
   
   //returns the current y coordinate of the player
-  public int getPlayerY(){
-    return g1.getPlayerY();
-  }
+//  public int getPlayerY(){
+ //   return g1.getPlayerY();
+//  }
   
   public Game()
   {
@@ -98,12 +99,14 @@ public class Game extends JPanel
       g1.paint(g2d);
       s1.paint(g2d);
       gh1.paint(g2d);
+      gho1.paint(g2d);
     }
   }
   
   public void move(){
     if(levelOn){
-      g1.move(); 
+      g1.move();
+      s1.move();
     }
   }
 }
