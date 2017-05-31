@@ -19,6 +19,10 @@ public class GraveDigger
   private boolean movingLeft = false;
   private boolean movingUp = false;
   private boolean movingDown = false;
+  private boolean movingRightFinish = false;
+  private boolean movingLeftFinish = false;
+  private boolean movingUpFinish = false;
+  private boolean movingDownFinish = false;
   private int x;
   private int y;
   private int xa;
@@ -44,68 +48,79 @@ public class GraveDigger
   }
   
   public void move(){
+    
     if ((x + xa <0) || (x + xa > (1280 - width) ))
-      xa *= -1;
+      xa *= 0;
     if ((y + ya <64) || (y + ya > (960) ))
-      ya *= -1;
+      ya *= 0;
     
     
-    int xL = (x + xa)/32;
-    if(movingLeft){
-      xL++; 
-    }
+    int xL = ((x + xa)/32);
     
     int yL =((y + ya - 95)/32);
     
-    if(level.getTile(xL, yL)== 'r'){
-      xa *= -1;
-      ya *= -1; 
+    
+    if(movingUp && (level.getTile(xL, yL+1)== 'r')){
+      xa = 0;
+      ya = 0;
+      movingUp = false;
     }
-    else if(movingRight && level.getTile(xL,yL) == 'r'){
-     xa *= -1;
-     ya *= -1;
+   if(movingDown && (level.getTile(xL, yL)== 'r')){
+      xa = 0;
+      ya = 0;
+      movingDown = false;
+    }
+    if(movingRight && (level.getTile(xL+1, yL)== 'r')){
+      xa = 0;
+      ya = 0;
+      movingRight = false;
+    }
+    if(movingLeft && (level.getTile(xL, yL)== 'r')){
+      xa = 0;
+      ya = 0;
+      movingLeft = false;
     }
     else{
-      level.setTile(xL,yL, 't');                    
+      level.setTile(xL,yL,'t');                    
     }
     
     if((x%32 != 0) || (y)%32 !=0){
-      if(movingLeft){
+      if(movingLeftFinish){
         xa = -1;
         ya = 0;
       }
-      if(movingRight){
+      if(movingRightFinish){
         xa = 1;
         ya = 0;
       }
-      if(movingUp){
+      if(movingUpFinish){
         ya = -1;
         xa = 0;
       }
-      if(movingDown){
+      if(movingDownFinish){
         ya = 1;
         xa = 0;
       }
     }
     
     else if((x%32 == 0) || (y)%32 ==0){
-      if(movingLeft){
-        movingLeft = false;
+      if(movingLeftFinish){
+        movingLeftFinish = false;
         xa = 0;
         ya = 0;
       }
-      if(movingRight){
-        movingRight = false;
+      if(movingRightFinish){
+        movingRightFinish = false;
         xa=0;
         ya=0;
       }
-      if(movingUp){
-        movingUp = false;
+      if(movingUpFinish){
+        movingUpFinish = false;
         xa=0;
         ya=0;
       }
-      if(movingDown){
-        movingDown = false;
+      if(movingDownFinish){
+        movingDownFinish = false;
         xa=0;
         ya=0;
       }
@@ -121,35 +136,39 @@ public class GraveDigger
     {
       if(ya == 0){
         xa = -1;
+        movingLeft = true;
       }
     }
     if (e.getKeyCode() == KeyEvent.VK_D)
     {
       if(ya == 0){
         xa = 1;
+        movingRight = true;
       }
     }
     if (e.getKeyCode() == KeyEvent.VK_W)
     {
       if(xa ==0){
         ya = -1;
+        movingDown = true;
       }
     }
     if (e.getKeyCode() == KeyEvent.VK_S)
       if(xa == 0){
       ya = 1;
+      movingDown = true;
     }
   }
   
   public void keyReleased(KeyEvent e){
     if(xa == -1)
-      movingLeft = true;
+      movingLeftFinish = true;
     if(xa == 1)
-      movingRight = true;
+      movingRightFinish = true;
     if(ya == 1)
-      movingDown = true;
+      movingDownFinish = true;
     if(ya == -1)
-      movingUp = true;
+      movingUpFinish = true;
     
     xa = 0;
     ya = 0;
