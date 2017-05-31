@@ -23,6 +23,7 @@ public class Ghoul extends Enemy
     
   public Ghoul(int x, int y,int xa, int ya,Game game) {
     super(x,y,xa,ya);
+    sprite = Toolkit.getDefaultToolkit().getImage("Ghoul.png");
     
   }
   
@@ -30,7 +31,6 @@ public class Ghoul extends Enemy
   public void paint(Graphics g)
   {
     Graphics2D g2 = (Graphics2D) g;
-    Image sprite = Toolkit.getDefaultToolkit().getImage("Ghoul.png");
     if (!flipped) g2.drawImage(sprite, x,y-height,width,height, null); //left facing sprite is "default sprite"
     else g2.drawImage(sprite, x+width,y-height,-width,height, null); //flipped left sprite
 
