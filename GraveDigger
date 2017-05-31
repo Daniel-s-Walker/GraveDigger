@@ -187,4 +187,4 @@ public class GraveDigger
     if (xa == -1) g2.drawImage(graveDigger, x,y-height,width,height, null); //left facing sprite is "default sprite"
     else g2.drawImage(graveDigger, x+width,y-height,-width,height, null); //flipped left sprite
   }
-}
+} 
