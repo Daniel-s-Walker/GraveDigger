@@ -46,6 +46,13 @@ public class GraveDigger
     this.game = game;
     this.level = level;
   }
+  public int getPlayerX(){
+    return x;
+  }
+  
+  public int getPlayerY() {
+    return y;
+  }
   
   public void move(){
     
