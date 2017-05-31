@@ -18,20 +18,15 @@ public class Collectibles{
   private int y = 0;
   private int width = 32;
   private int height = 32;
-  
-  
-  //holds what the item type is
-  private int collectibleType = 0;
-  
-  
-  //tells you if the collectible is picked up
+  private Image collectibles;
+
   private boolean pickedUp = false;
+
   
-  
-  public Collectibles(int collectibleType, int x, int y, Game gd){
-    this.collectibleType = collectibleType;
-    this.x = x;
-    this.y= y;
+  public Collectibles(int x, int y, Game gd){
+    this.x=x;
+    this.y=y;
+    collectibles = Toolkit.getDefaultToolkit().getImage("coinbag.png");
   }
 
   
@@ -40,21 +35,18 @@ public class Collectibles{
  // @Override
 public void paint(Graphics g){
     Graphics2D g2 = (Graphics2D) g;
-    Image collectible = Toolkit.getDefaultToolkit().getImage("GraveDigger.png");
-    if (xa == -1) g2.drawImage(collectible, x,y-height,width,height, null); //left facing sprite is "default sprite"
-    else g2.drawImage(collectible, x+width,y-height,-width,height, null); //flipped left sprite
-  }
+    
+    if (pickedUp == false) g2.drawImage(collectibles, x,y-height,width,height, null); 
+   
+}
+
+public void setPickedUp() {
+  pickedUp = true;
+}
 }
     
-    
-    
-  
-  
-  }
+ 
   
   
   
   
-  
-  
-}
