@@ -19,6 +19,7 @@ public class Ghost extends Enemy
     
   public Ghost(int x, int y, int xa, int ya, Game game) {
     super(x,y,xa,ya);
+    sprite = Toolkit.getDefaultToolkit().getImage("Ghost.png");
     
   }
   
@@ -26,7 +27,6 @@ public class Ghost extends Enemy
   public void paint(Graphics g)
   {
     Graphics2D g2 = (Graphics2D) g;
-    Image sprite = Toolkit.getDefaultToolkit().getImage("Ghost.png");
     if (!flipped) g2.drawImage(sprite, x,y-height,width,height, null); //left facing sprite is "default sprite"
     else g2.drawImage(sprite, x+width,y-height,-width,height, null); //flipped left sprite
 
