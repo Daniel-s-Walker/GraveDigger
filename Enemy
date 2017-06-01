@@ -22,31 +22,35 @@ public abstract class Enemy
   protected Image sprite;
   protected boolean flipped;
   private Game game;
+  
+  //these represent the current position of the gravedigger, the enemies will always try to go there
   protected int playerX = 0;
   protected int playerY = 0;
-  
-  
-  public Enemy(int x, int y) 
+
+  public Enemy(int x, int y,int xa,int ya, Game game) 
   {
     this.x = x;
     this.y = y;
-
+    this.xa = xa;
+    this.ya = ya;
+    this.game = game;
   }
-
-  }
-   public void updateTarget(){
+  
+  //updates the variables playerX and playerY which are used by the enemies to move toward the grave digger
+  public void updateTarget(){
     //has to go through game
    playerX = game.getPlayerX();
    playerY = game.getPlayerY();
-  }  
-
+   
+   System.out.println(playerX +  ", " + playerY);
+  }
+  
   
   
   public void paint(Graphics g) {
-Graphics2D g2 = (Graphics2D) g;
-System.out.println("Printing");
+    Graphics2D g2 = (Graphics2D) g;
 
-    }
+    
+  }
 }
-  
-  
+
