@@ -23,6 +23,8 @@ public class Game extends JPanel
   private Skeleton s1 = new Skeleton(32*2,32*6,0,0,this);
   private Ghost gh1 =(new Ghost(32*3,32*6,0,0,this));
   private Ghoul gho1 = new Ghoul(32*5,32*10,0,0,this);
+  private Collectibles c1 = new Collectibles (32*10,32*15,this);
+  private shop s2 = new shop(1280,960);
   
   public static void main (String[] args) throws InterruptedException  {
     JFrame frame = new JFrame("GraveDigger");
@@ -41,14 +43,14 @@ public class Game extends JPanel
   }
   
   //returns the current x coordinate of the player
-  //public int getPlayerX(){
-   // return g1.getPlayerX();
-  //}
+  public int getPlayerX(){
+    return g1.getPlayerX();
+  }
   
   //returns the current y coordinate of the player
-//  public int getPlayerY(){
- //   return g1.getPlayerY();
-//  }
+  public int getPlayerY(){
+    return g1.getPlayerY();
+  }
   
   public Game()
   {
@@ -100,13 +102,19 @@ public class Game extends JPanel
       s1.paint(g2d);
       gh1.paint(g2d);
       gho1.paint(g2d);
+      c1.paint(g2d);
     }
   }
   
   public void move(){
     if(levelOn){
       g1.move();
+      s1.updateTarget();
       s1.move();
+      gho1.updateTarget();
+      gho1.move();
+      gh1.updateTarget();
+      gh1.move();
     }
   }
 }
