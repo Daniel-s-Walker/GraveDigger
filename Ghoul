@@ -22,7 +22,7 @@ public class Ghoul extends Enemy
   
     
   public Ghoul(int x, int y,int xa, int ya,Game game) {
-    super(x,y,xa,ya);
+    super(x,y,xa,ya,game);
     sprite = Toolkit.getDefaultToolkit().getImage("Ghoul.png");
     
   }
@@ -36,57 +36,57 @@ public class Ghoul extends Enemy
 
   }
   
-  public void move(){
-    if ((x + xa <0) || (x + xa > (1280 - width) ))
-      xa *= -1;
-    if ((y + ya <64) || (y + ya > (960) ))
-      ya *= -1;
-    
-    if((x%32 != 0) || (y)%32 !=0){
-      if(movingLeft){
-        xa = -1;
-        ya = 0;
-      }
-      if(movingRight){
-        xa = 1;
-        ya = 0;
-      }
-      if(movingUp){
-       ya = -1;
-       xa = 0;
-      }
-      if(movingDown){
-       ya = 1;
-       xa = 0;
-      }
-    }
-    else if((x%32 == 0) || (y)%32 ==0){
-      if(movingLeft){
-      movingLeft = false;
-      xa = 0;
-      ya = 0;
-      }
-      if(movingRight){
-      movingRight = false;
-      xa=0;
-      ya=0;
-      }
-      if(movingUp){
-      movingUp = false;
-      xa=0;
-      ya=0;
-      }
-      if(movingDown){
-      movingDown = false;
-      xa=0;
-      ya=0;
-      }
-    }
-    x= x+xa;
-    y= y+ya;
-    
-
-    
-  }
+//  public void move(){
+//    if ((x + xa <0) || (x + xa > (1280 - width) ))
+//      xa *= -1;
+//    if ((y + ya <64) || (y + ya > (960) ))
+//      ya *= -1;
+//    
+//    if((x%32 != 0) || (y)%32 !=0){
+//      if(movingLeft){
+//        xa = -1;
+//        ya = 0;
+//      }
+//      if(movingRight){
+//        xa = 1;
+//        ya = 0;
+//      }
+//      if(movingUp){
+//       ya = -1;
+//       xa = 0;
+//      }
+//      if(movingDown){
+//       ya = 1;
+//       xa = 0;
+//      }
+//    }
+//    else if((x%32 == 0) || (y)%32 ==0){
+//      if(movingLeft){
+//      movingLeft = false;
+//      xa = 0;
+//      ya = 0;
+//      }
+//      if(movingRight){
+//      movingRight = false;
+//      xa=0;
+//      ya=0;
+//      }
+//      if(movingUp){
+//      movingUp = false;
+//      xa=0;
+//      ya=0;
+//      }
+//      if(movingDown){
+//      movingDown = false;
+//      xa=0;
+//      ya=0;
+//      }
+//    }
+//    x= x+xa;
+//    y= y+ya;
+//    
+//
+//    
+//  }
   
 }
