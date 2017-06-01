@@ -18,7 +18,7 @@ public class Ghost extends Enemy
   
     
   public Ghost(int x, int y, int xa, int ya, Game game) {
-    super(x,y,xa,ya);
+    super(x,y,xa,ya,game);
     sprite = Toolkit.getDefaultToolkit().getImage("Ghost.png");
     
   }
@@ -32,13 +32,13 @@ public class Ghost extends Enemy
 
   }
   
-  public void move(){
-    if ((x + xa <0) || (x + xa > (1280 - width) ))
-      xa *= -1;
-    if ((y + ya <78) || (y + ya > (960) ))
-      ya *= -1;
-    x= x+xa;
-    y= y+ya;
-  }
+//  public void move(){
+//    if ((x + xa <0) || (x + xa > (1280 - width) ))
+//      xa *= -1;
+//    if ((y + ya <78) || (y + ya > (960) ))
+//      ya *= -1;
+//    x= x+xa;
+//    y= y+ya;
+//  }
   
 }
