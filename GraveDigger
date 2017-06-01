@@ -11,98 +11,198 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Toolkit;
 
-public class Game extends JPanel
+public class GraveDigger
 {
-  //menu
-  private MainMenu menu = new MainMenu(this); 
-  //level
-  private Level l1 = new Level();
-  private boolean levelOn = false;
-  //gravedigger
-  private GraveDigger g1 = new GraveDigger(false, false, 0, 64, 0, 0, this, l1);
-//  private Skeleton s1 = new Skeleton(50,200,this);
-//  private Ghost gh1 = (new Ghost(300,500,this));
+  private boolean hasArmor;
+  private boolean hasWand;
+  private boolean movingRight = false;
+  private boolean movingLeft = false;
+  private boolean movingUp = false;
+  private boolean movingDown = false;
+  private boolean movingRightFinish = false;
+  private boolean movingLeftFinish = false;
+  private boolean movingUpFinish = false;
+  private boolean movingDownFinish = false;
+  private int x;
+  private int y;
+  private int xa;
+  private int ya;
+  private int height = 32; 
+  private int width = 32;
+  private Game game;
+  private Level level;
   
-  public static void main (String[] args) throws InterruptedException  {
-    JFrame frame = new JFrame("GraveDigger");
-    Game gd = new Game();
-    frame.add(gd);
-    frame.setSize(1280, 960);
-    
-    frame.setVisible(true);
-    
-    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    while (true) {
-      gd.move(); 
-      gd.repaint();
-      Thread.sleep(10); 
-    }
-  }
   
-//  //returns the current x coordinate of the player
-//  public int getPlayerX(){
-//    return g1.getPlayerX();
-//  }
-//  
-//  //returns the current y coordinate of the player
-//  public int getPlayerY(){
-//    return g1.getPlayerY();
-//  }
-  
-  public Game()
+  public GraveDigger(boolean hasArmor, boolean hasWand,int x, int y, int xa, int ya, Game game, Level level)
   {
+    this.hasArmor = hasArmor;
     
+    this.hasWand = hasWand;
+    this.x = x;
+    this.y = y;
+    this.xa = xa;
+    this.ya = ya;
     
-    addKeyListener(new KeyListener() {
-      
-      @Override
-      public void keyTyped(KeyEvent e) {
-      } 
-      
-      @Override
-      public void keyReleased(KeyEvent e) {
-        if(menu.getMenuOn())
-          menu.keyReleased(e);
-        g1.keyReleased(e);
-      }  
-      
-      @Override    
-      public void keyPressed(KeyEvent e) {
-        g1.keyPressed(e);
-      }
-    });
-    
-    setFocusable(true);
+    this.game = game;
+    this.level = level;
+  }
+  public int getPlayerX(){
+    return x;
   }
   
-  public void setLevelOn(boolean a){
-    levelOn =  a;
-  }
-  
-  public boolean getLevelOn(){
-    return levelOn; 
-  }
-  
-  @Override
-  public void paint(Graphics g) {
-    Graphics2D g2d = (Graphics2D) g;
-    super.paint(g);
-    
-    if(levelOn)
-      l1.paint(g2d);
-    if(menu.getMenuOn())
-      menu.paint(g2d);
-    if(levelOn)
-    {
-      g1.paint(g2d);
-//      s1.paint(g2d);
-//      gh1.paint(g2d);
-    }
+  public int getPlayerY() {
+    return y;
   }
   
   public void move(){
-    if(levelOn){
-      g1.move(); 
+    
+    if ((x + xa <0) || (x + xa > (1280 - width) ))
+      xa *= 0;
+    if ((y + ya <64) || (y + ya > (960) ))
+      ya *= 0;
+    
+    
+    int xL = ((x + xa + 32)/32);
+    if(movingLeft)
+      xL++;
+    int yL =((y + ya - 95)/32);
+    if(movingUp)
+      yL++;
+    
+    if(movingUp && (level.getTile(xL, yL-1)== 'r')){
+      xa = 0;
+      ya = 0;
+      movingUp = false;
+      movingDownFinish =true;
+      System.out.println("rock up");
+    }
+    else if(movingDown && (level.getTile(xL, yL+1)== 'r')){
+      xa = 0;
+      ya = 0;
+      movingDown = false;
+      movingUpFinish=true;
+      System.out.println("rock down");
+    }
+    else if(movingRight && (level.getTile(xL+1, yL)== 'r')){
+      xa = 0;
+      ya = 0;
+      movingRight = false;
+      movingLeftFinish=true;
+      
+      System.out.println("rock right");
+    }
+    else if(movingLeft && (level.getTile(xL-1, yL)== 'r')){
+      xa = 0;
+      ya = 0;
+      movingLeft = false;
+      movingRightFinish=true;
+      System.out.println("rock down");
+    }
+    
+    else{
+      if(movingUp)
+        yL--;
+      level.setTile(xL,yL,'t');                    
+    }
+    
+    if((x%32 != 0) || (y)%32 !=0){
+      if(movingLeftFinish){
+        xa = -1;
+        ya = 0;
+      }
+      if(movingRightFinish){
+        xa = 1;
+        ya = 0;
+      }
+      if(movingUpFinish){
+        ya = -1;
+        xa = 0;
+      }
+      if(movingDownFinish){
+        ya = 1;
+        xa = 0;
+      }
+    }
+    
+    else if((x%32 == 0) || (y)%32 ==0){
+      if(movingLeftFinish){
+        movingLeftFinish = false;
+        movingLeft=false;
+        xa = 0;
+        ya = 0;
+      }
+      if(movingRightFinish){
+        movingRightFinish = false;
+        movingRight = false;
+        xa=0;
+        ya=0;
+      }
+      if(movingUpFinish){
+        movingUpFinish = false;
+        movingUp = false;
+        xa=0;
+        ya=0;
+      }
+      if(movingDownFinish){
+        movingDownFinish = false;
+        movingDown = false;
+        xa=0;
+        ya=0;
+      }
+    }
+    
+    x= x+xa;
+    y= y+ya;
+  }
+  
+  public void keyPressed(KeyEvent e){
+    //only allows movement in one direction at a time
+    if (e.getKeyCode() == KeyEvent.VK_A)
+    {
+      if(ya == 0){
+        xa = -1;
+        movingLeft = true;
+      }
+    }
+    if (e.getKeyCode() == KeyEvent.VK_D)
+    {
+      if(ya == 0){
+        xa = 1;
+        movingRight = true;
+      }
+    }
+    if (e.getKeyCode() == KeyEvent.VK_W)
+    {
+      if(xa ==0){
+        ya = -1;
+        movingUp = true;
+      }
+    }
+    if (e.getKeyCode() == KeyEvent.VK_S)
+      if(xa == 0){
+      ya = 1;
+      movingDown = true;
     }
   }
-}
+  
+  public void keyReleased(KeyEvent e){
+    if(xa == -1)
+      movingLeftFinish = true;
+    if(xa == 1)
+      movingRightFinish = true;
+    if(ya == 1)
+      movingDownFinish = true;
+    if(ya == -1)
+      movingUpFinish = true;
+    
+    xa = 0;
+    ya = 0;
+  }
+  
+  public void paint(Graphics g){
+    Graphics2D g2 = (Graphics2D) g;
+    Image graveDigger = Toolkit.getDefaultToolkit().getImage("GraveDigger.png");
+    if (xa == -1) g2.drawImage(graveDigger, x,y-height,width,height, null); //left facing sprite is "default sprite"
+    else g2.drawImage(graveDigger, x+width,y-height,-width,height, null); //flipped left sprite
+  }
+} 
