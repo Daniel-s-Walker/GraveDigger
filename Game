@@ -20,11 +20,9 @@ public class Game extends JPanel
   private boolean levelOn = false;
   //gravedigger
   private GraveDigger g1 = new GraveDigger(false, false, 0, 64, 0, 0, this, l1);
-  private Skeleton s1 = new Skeleton(32*2,32*6,0,0,this);
-  private Ghost gh1 =(new Ghost(32*3,32*6,0,0,this));
-  private Ghoul gho1 = new Ghoul(32*5,32*10,0,0,this);
   private Collectibles c1 = new Collectibles (32*10,32*15,this);
   private shop s2 = new shop(1280,960);
+   private Enemy e = new Enemy(0,0,0,0,this);
   
   public static void main (String[] args) throws InterruptedException  {
     JFrame frame = new JFrame("GraveDigger");
@@ -76,6 +74,7 @@ public class Game extends JPanel
     });
     
     setFocusable(true);
+    e.enemyReader();
   }
   
   public void setLevelOn(boolean a){
@@ -99,22 +98,47 @@ public class Game extends JPanel
     if(levelOn)
     {
       g1.paint(g2d);
-      s1.paint(g2d);
-      gh1.paint(g2d);
-      gho1.paint(g2d);
+      
+
+
       c1.paint(g2d);
+      
+      for(Skeleton a:e.getSList())
+       a.paint(g2d);
+      
+      for(Ghost a:e.getGList())
+        a.paint(g2d);
+      
+       for(Ghoul a:e.getGhList())
+        a.paint(g2d);
+      
+
     }
   }
   
   public void move(){
     if(levelOn){
       g1.move();
-      s1.updateTarget();
-      s1.move();
-      gho1.updateTarget();
-      gho1.move();
-      gh1.updateTarget();
-      gh1.move();
+      for(Skeleton b:e.getSList())
+      {
+        b.updateTarget();
+        b.move();
+      }
+      
+      for(Ghost b:e.getGList())
+      {
+        b.updateTarget();
+        b.move();
+      }
+      
+      for(Ghoul b:e.getGhList())
+      {
+        b.updateTarget();
+        b.move();
+      }
+      
+ 
+
     }
   }
 }
