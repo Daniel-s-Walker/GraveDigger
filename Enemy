@@ -11,7 +11,7 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Toolkit;
 
-public abstract class Enemy
+public class Enemy
 {
   protected int x;
   protected int y;
@@ -22,6 +22,18 @@ public abstract class Enemy
   protected Image sprite;
   protected boolean flipped;
   private Game game;
+  private int xL = 45;
+  private int yL = 38;
+  Skeleton[] sList = new Skeleton[2];
+  Ghost[] gList = new Ghost[3];
+  Ghoul[] ghList = new Ghoul[3];
+  private int skeletonNumber = 0;
+  private int ghostNumber = 0;
+  private int ghoulNumber = 0;
+ 
+  
+  private int[][] enemyLayout;
+  
   
   //these represent the current position of the gravedigger, the enemies will always try to go there
   protected int playerX = 0;
@@ -34,6 +46,40 @@ public abstract class Enemy
     this.xa = xa;
     this.ya = ya;
     this.game = game;
+    
+    enemyLayout = new int[xL][yL];
+    try
+    {
+      //Create a new instance of the FileReader and pass it the
+      //file that needs to be read
+      FileReader fr2 = new FileReader("enemy.txt");
+      
+      //Create a new instance of the BufferedReader and
+      //add the FileReader to it
+      BufferedReader br2 = new BufferedReader(fr2);
+      //A string variable that will temporarily what you’re reading
+      String line;
+      //A dual purpose line! First it reads the next line and then
+      //it checks to see if that line was null. If it’s null, then
+      //that means you’re at the end of the file.
+      int yPos = 0;
+      int xPos = 0;
+      while ((line=br2.readLine()) != null)
+      {
+        for(int i = 0; i < line.length(); i++){
+          enemyLayout[xPos][yPos] = line.charAt(i);
+          xPos++;
+        }
+        yPos++;
+        xPos = 0;
+      }
+      //close the file when you’re done
+      br2.close();
+    }
+    catch(IOException e)
+    {
+      //Error message
+    }
   }
   
   //updates the variables playerX and playerY which are used by the enemies to move toward the grave digger
@@ -42,7 +88,7 @@ public abstract class Enemy
    playerX = game.getPlayerX();
    playerY = game.getPlayerY();
    
-   System.out.println(playerX +  ", " + playerY);
+ 
   }
   
   
@@ -56,13 +102,21 @@ public abstract class Enemy
       dif = playerX - x;
       
       //the enemy is left of the player moves right
-      if(dif > 0){xa = 1;}
+      if(dif > 0){
+        xa = 1;
+        ya = 0;
+      }
       
       //if the enemy is right of the player moves left
-      if(dif < 0){xa = -1;}
+      if(dif < 0){
+        xa = -1;
+        ya = 0;
+      }
       
       //if the enemy is on the same x value as the player stops moving on the x
-      if(dif == 0){xa = 0;}
+      if(dif == 0){
+        xa = 0;
+      }
     }
     else if(Math.abs(playerY - y) > Math.abs(playerX- x)){
       
@@ -70,10 +124,16 @@ public abstract class Enemy
       dif = playerY - y;
       
       //if the enemy has a lower y value than the player / above the player, enemy moves up
-      if(dif > 0){ya = 1;}
+      if(dif > 0){
+        ya = 1;
+        xa = 0;
+      }
       
       //if the enemy has a greater y value / is below the player, enemy moves down
-      if(dif < 0){ya = -1;}
+      if(dif < 0){
+        ya = -1;
+        xa = 0;
+      }
       
       //if the enemy is on the same y value as the player stops moving on the y
       if(dif == 0){ya = 0;}
@@ -130,11 +190,56 @@ public abstract class Enemy
     x = x+xa;
     y =y+ya;
     
+    
+    
   }
+    
+    public void enemyReader() {
+      
+       x = 0;
+    //sky ends after y value
+    y = 64;
+    for(int i = 0; i < xL; i++){
+      for(int z = 0; z < yL; z++){
+        if(enemyLayout[i][z] == 's'){
+          sList[skeletonNumber] = new Skeleton(32*i,32*z,0,0,game);
+          skeletonNumber++;
+        }
+        if(enemyLayout[i][z] == 'g'){
+          gList[ghostNumber] = new Ghost(32*i,32*z,0,0,game);
+          ghostNumber++;
+        }
+        if(enemyLayout[i][z] == 'h'){
+          ghList[ghoulNumber] = new Ghoul(32*i,32*z,0,0,game);
+          ghoulNumber++;
+        }
+        y = y + height;
+      }
+      x = x + width;
+      y = 64;
+    }
+    }
+
+        
+    public Skeleton[] getSList()
+    {
+      return sList;
+    }
+    
+    public Ghost[] getGList()
+    {
+      return gList;
+    }
+    
+    public Ghoul[] getGhList()
+    {
+      return ghList;
+    }
+    
     
   public void paint(Graphics g) {
     Graphics2D g2 = (Graphics2D) g;
+  }
 
     
   }
-}
