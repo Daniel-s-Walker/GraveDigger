@@ -56,11 +56,16 @@ public class GraveDigger
   
   public void move(){
     
-    if ((x + xa <0) || (x + xa > (1280 - width) ))
+    if ((x + xa <0) || (x + xa > (1280 - width) )){
       xa *= 0;
-    if ((y + ya <64) || (y + ya > (960) ))
+      movingLeft = false;
+      movingRight=false;
+    }
+    if ((y + ya <64) || (y + ya > (960) )){
       ya *= 0;
-    
+      movingUp=false;
+      movingRight=false;
+    }
     
     int xL = ((x + xa + 32)/32);
     if(movingLeft)
@@ -88,7 +93,6 @@ public class GraveDigger
       ya = 0;
       movingRight = false;
       movingLeftFinish=true;
-      
       System.out.println("rock right");
     }
     else if(movingLeft && (level.getTile(xL-1, yL)== 'r')){
