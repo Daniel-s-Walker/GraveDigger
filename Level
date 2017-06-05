@@ -14,7 +14,7 @@ public class Level{
   private int x;
   private int y;
   private int xL = 42;
-  private int yL = 28;
+  private int yL = 31;
   private int[][] levelLayout;
   
   public Level(){
