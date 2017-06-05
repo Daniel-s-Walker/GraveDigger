@@ -1,4 +1,4 @@
-  import javax.swing.*;
+import javax.swing.*;
   import java.awt.*;
   import java.awt.image.*;
   import javax.imageio.*;
@@ -87,7 +87,7 @@
     public void getRockList(){
       int a = 0;
       for(int i = 0; i < 42; i++){
-        for(int z = 0; z < 28; z++){
+        for(int z = 0; z < 31; z++){
           if(l1.getTile(i,z) == 'r'){
             rocks[a] = new Rock(l1,this,i,z);
             a++;
@@ -146,24 +146,34 @@
         {
           b.updateTarget();
           b.move();
+          g1.collision(b);
         }
 
         for(Ghost b:e.getGList())
         {
           b.updateTarget();
           b.move();
+          g1.collision(b);
         }
 
         for(Ghoul b:e.getGhList())
         {
           b.updateTarget();
           b.move();
+          g1.collision(b);
         }
 
         //rock movement
         for(int i = 0; i<rocks.length;i++){
           rocks[i].rockFall();
         }
+        
+
       }
+      if (g1.getDead()) {
+        setLevelOn(false);
+        menu.setMenuOn(true);
+        g1.setDead();        
     }
+  }
   }
