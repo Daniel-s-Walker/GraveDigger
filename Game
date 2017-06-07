@@ -13,15 +13,21 @@ import javax.swing.*;
 
   public class Game extends JPanel
   {
-    //menu
-    private MainMenu menu = new MainMenu(this); 
-    //level
-    private Level l1 = new Level();
-    private boolean levelOn = false;
-    //gravedigger
-    private GraveDigger g1 = new GraveDigger(false, false, 0, 64, 0, 0, this, l1);
-    //rocks
-    private Rock[] rocks = new Rock[l1.getRockCount()];
+   //menu
+  
+  private MainMenu menu = new MainMenu(this); 
+  //level
+  private Level l1; 
+  private boolean levelOn = false;
+  private int levelInt = 1;
+  private boolean levelLoaded = false;
+  
+//gravedigger
+  private GraveDigger g1;
+  
+  
+//rocks
+  private Rock[] rocks;
 
     private Collectibles c1 = new Collectibles (32*10,32*15,this);
     private shop s2 = new shop(1280,960);
@@ -77,10 +83,9 @@ import javax.swing.*;
       });
 
       setFocusable(true);
+      //move to levelLoad()
       e.enemyReader();
 
-      //creates the list of rocks (needs to be moved so this happens in level, right now only works with one given level file)
-      getRockList();
     }
 
     //method for creating the list of rocks (may have to be moved to level)
@@ -95,6 +100,28 @@ import javax.swing.*;
         }
       }
     }
+
+//LEVEL LOADER
+  public void levelLoad(){
+    String leveltxt = "level" + levelInt + ".txt"; 
+    this.l1 = new Level(leveltxt);
+    rocks = new Rock[l1.getRockCount()];
+    this.g1 = new GraveDigger(false, false, 0, 64, 0, 0,this,l1);
+    levelLoaded = true;
+    //creates the list of rocks
+    getRockList();
+    System.out.println(leveltxt);
+  }
+  
+  //Increases level int, moving to next level
+  public void setLevelInt(){
+    levelInt++;
+  }
+  
+  //changes levelLoaded to false, causing next level to load
+  public void setLevelLoaded(){
+   levelLoaded = false; 
+  }
 
     public void setLevelOn(boolean a){
       levelOn =  a;
@@ -136,6 +163,11 @@ import javax.swing.*;
     }
 
     public void move(){
+    
+    if(!levelLoaded){
+      levelLoad();
+    }
+    
       if(levelOn){
 
       //player movement
