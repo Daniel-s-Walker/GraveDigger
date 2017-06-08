@@ -14,35 +14,116 @@ import java.awt.Toolkit;
 public class Collectibles{
   
   //x and y of the collectible
-  private int x = 0;
-  private int y = 0;
+  protected int x = 0;
+  protected int y = 0;
   private int width = 32;
   private int height = 32;
   private Image collectibles;
+  private int xL = 42;
+  private int yL = 31;
+  private boolean isKey;
+  private Game game;
 
   private boolean pickedUp = false;
+  
+  private int[][] collectiblesLayout;
+  Collectibles[] cList = new Collectibles[5];
+  private int coinNumber = 0;
 
   
-  public Collectibles(int x, int y, Game gd){
+  public Collectibles(int x, int y, Game game){
     this.x=x;
     this.y=y;
-    collectibles = Toolkit.getDefaultToolkit().getImage("coinbag.png");
+    this.game=game;
+    
+    collectiblesLayout = new int[xL][yL];
+    try
+    {
+      //Create a new instance of the FileReader and pass it the
+      //file that needs to be read
+      FileReader fr2 = new FileReader("collectibles.txt");
+      
+      //Create a new instance of the BufferedReader and
+      //add the FileReader to it
+      BufferedReader br2 = new BufferedReader(fr2);
+      //A string variable that will temporarily what you’re reading
+      String line;
+      //A dual purpose line! First it reads the next line and then
+      //it checks to see if that line was null. If it’s null, then
+      //that means you’re at the end of the file.
+      int yPos = 0;
+      int xPos = 0;
+      while ((line=br2.readLine()) != null)
+      {
+        for(int i = 0; i < line.length(); i++){
+          collectiblesLayout[xPos][yPos] = line.charAt(i);
+          xPos++;
+        }
+        yPos++;
+        xPos = 0;
+      }
+      //close the file when you’re done
+      br2.close();
+    }
+    catch(IOException e)
+    {
+      //Error message
+    }
   }
-
   
+  public void collectiblesReader() {
+      
+       x = 0;
+    //sky ends after y value
+    y = 64;
+    for(int i = 0; i < xL; i++){
+      for(int z = 0; z < yL; z++){
+        if(collectiblesLayout[i][z] == 'c'){
+          cList[coinNumber] = new Collectibles(32*i,32*z,game);
+          collectibles = Toolkit.getDefaultToolkit().getImage("coinbag.png");
+          coinNumber++;
+        }
+        if(collectiblesLayout[i][z] == 'k'){
+          cList[coinNumber] = new Collectibles(32*i,32*z,game);
+          collectibles = Toolkit.getDefaultToolkit().getImage("key.png");
+          isKey = true;
+          coinNumber++;
+        }
+
+        y = y + height;
+      }
+      x = x + width;
+      y = 64;
+    }
+    }
+
+  public boolean getPickedUp() {
+    return pickedUp;
+  }
+  
+  public void setPickedUp() {
+    pickedUp = true;
+  }
+  
+  public boolean getIsKey() {
+    return isKey;
+  }
+  
+  public Collectibles[] getCList() {
+    return cList;
+  }
   
   
  // @Override
 public void paint(Graphics g){
     Graphics2D g2 = (Graphics2D) g;
     
-    if (pickedUp == false) g2.drawImage(collectibles, x,y-height,width,height, null); 
+    if (pickedUp == false) g2.drawImage(collectibles, 500,800,width,height, null); 
+
    
 }
 
-public void setPickedUp() {
-  pickedUp = true;
-}
+
 }
     
  
