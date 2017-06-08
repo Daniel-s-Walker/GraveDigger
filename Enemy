@@ -30,7 +30,7 @@ public class Enemy
   private int skeletonNumber = 0;
   private int ghostNumber = 0;
   private int ghoulNumber = 0;
- 
+ protected String enemytxt;
   
   private int[][] enemyLayout;
   
@@ -39,20 +39,22 @@ public class Enemy
   protected int playerX = 0;
   protected int playerY = 0;
 
-  public Enemy(int x, int y,int xa,int ya, Game game) 
+  public Enemy(int x, int y,int xa,int ya, Game game,Level level, String enemytxt) 
   {
     this.x = x;
     this.y = y;
     this.xa = xa;
     this.ya = ya;
     this.game = game;
+    this.level = level;
+    this.enemytxt = enemytxt;
     
     enemyLayout = new int[xL][yL];
     try
     {
       //Create a new instance of the FileReader and pass it the
       //file that needs to be read
-      FileReader fr2 = new FileReader("enemy.txt");
+      FileReader fr2 = new FileReader(enemytxt);
       
       //Create a new instance of the BufferedReader and
       //add the FileReader to it
