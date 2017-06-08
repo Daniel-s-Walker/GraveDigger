@@ -30,18 +30,20 @@ public class Collectibles{
   Collectibles[] cList = new Collectibles[5];
   private int coinNumber = 0;
 
+   private String collectiblestxt;
   
-  public Collectibles(int x, int y, Game game){
+  public Collectibles(int x, int y, Game game,String collectiblestxt){
     this.x=x;
     this.y=y;
     this.game=game;
+    this.collectiblestxt = collectiblestxt;
     
     collectiblesLayout = new int[xL][yL];
     try
     {
       //Create a new instance of the FileReader and pass it the
       //file that needs to be read
-      FileReader fr2 = new FileReader("collectibles.txt");
+      FileReader fr2 = new FileReader(collectiblestxt);
       
       //Create a new instance of the BufferedReader and
       //add the FileReader to it
