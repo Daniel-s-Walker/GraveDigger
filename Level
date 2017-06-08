@@ -17,13 +17,17 @@ public class Level{
   private int yL = 31;
   private int[][] levelLayout;
   
-  public Level(){
+  private String leveltxt;
+  
+  
+  public Level(String leveltxt){
     levelLayout = new int[xL][yL];
+    this.leveltxt = leveltxt;
     try
     {
       //Create a new instance of the FileReader and pass it the
       //file that needs to be read
-      FileReader fr = new FileReader("level.txt");
+      FileReader fr = new FileReader(leveltxt);
       //Create a new instance of the BufferedReader and
       //add the FileReader to it
       BufferedReader br = new BufferedReader(fr);
