@@ -201,18 +201,18 @@ public class Enemy
        x = 0;
     //sky ends after y value
     y = 64;
-    for(int i = 0; i < xL; i++){
+    ffor(int i = 0; i < xL; i++){
       for(int z = 0; z < yL; z++){
         if(enemyLayout[i][z] == 's'){
-          sList[skeletonNumber] = new Skeleton(32*i,32*z,0,0,game);
+          sList[skeletonNumber] = new Skeleton(32*i,32*z,0,0,game,level,enemytxt);
           skeletonNumber++;
         }
         if(enemyLayout[i][z] == 'g'){
-          gList[ghostNumber] = new Ghost(32*i,32*z,0,0,game);
+          gList[ghostNumber] = new Ghost(32*i,32*z,0,0,game,level,enemytxt);
           ghostNumber++;
         }
         if(enemyLayout[i][z] == 'h'){
-          ghList[ghoulNumber] = new Ghoul(32*i,32*z,0,0,game);
+          ghList[ghoulNumber] = new Ghoul(32*i,32*z,0,0,game,level,enemytxt);
           ghoulNumber++;
         }
         y = y + height;
@@ -220,7 +220,7 @@ public class Enemy
       x = x + width;
       y = 64;
     }
-    }
+  }
 
         
     public Skeleton[] getSList()
