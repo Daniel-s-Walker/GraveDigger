@@ -21,8 +21,8 @@ public class Ghoul extends Enemy
   private boolean movingDown = false;
   
     
-  public Ghoul(int x, int y,int xa, int ya,Game game, Level level) {
-    super(x,y,xa,ya,game, level);
+   public Ghoul(int x, int y,int xa, int ya,Game game, Level level,String leveltxt) {
+    super(x,y,xa,ya,game,level,leveltxt);
     sprite = Toolkit.getDefaultToolkit().getImage("Ghoul.png");
     
   }
