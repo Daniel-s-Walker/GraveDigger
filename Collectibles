@@ -16,21 +16,20 @@ public class Collectibles{
   //x and y of the collectible
   protected int x = 0;
   protected int y = 0;
-  private int width = 32;
-  private int height = 32;
+  protected int width = 32;
+  protected int height = 32;
   private Image collectibles;
   private int xL = 42;
-  private int yL = 31;
-  private boolean isKey;
+  private int yL = 30;
+
   private Game game;
 
-  private boolean pickedUp = false;
   
   private int[][] collectiblesLayout;
-  Collectibles[] cList = new Collectibles[5];
+  Collectibles2[] cList = new Collectibles2[5];
   private int coinNumber = 0;
 
-   private String collectiblestxt;
+  private String collectiblestxt;
   
   public Collectibles(int x, int y, Game game,String collectiblestxt){
     this.x=x;
@@ -81,14 +80,12 @@ public class Collectibles{
     for(int i = 0; i < xL; i++){
       for(int z = 0; z < yL; z++){
         if(collectiblesLayout[i][z] == 'c'){
-          cList[coinNumber] = new Collectibles(32*i,32*z,game);
-          collectibles = Toolkit.getDefaultToolkit().getImage("coinbag.png");
+          cList[coinNumber] = new Collectibles2(32*i,32*z,game,false,collectiblestxt);
+          
           coinNumber++;
         }
         if(collectiblesLayout[i][z] == 'k'){
-          cList[coinNumber] = new Collectibles(32*i,32*z,game);
-          collectibles = Toolkit.getDefaultToolkit().getImage("key.png");
-          isKey = true;
+          cList[coinNumber] = new Collectibles2(32*i,32*z,game,true,collectiblestxt);         
           coinNumber++;
         }
 
@@ -99,32 +96,12 @@ public class Collectibles{
     }
     }
 
-  public boolean getPickedUp() {
-    return pickedUp;
-  }
+
   
-  public void setPickedUp() {
-    pickedUp = true;
-  }
-  
-  public boolean getIsKey() {
-    return isKey;
-  }
-  
-  public Collectibles[] getCList() {
+  public Collectibles2[] getCList() {
     return cList;
   }
   
-  
- // @Override
-public void paint(Graphics g){
-    Graphics2D g2 = (Graphics2D) g;
-    
-    if (pickedUp == false) g2.drawImage(collectibles, 500,800,width,height, null); 
-
-   
-}
-
 
 }
     
