@@ -21,7 +21,7 @@ public class Skeleton extends Enemy
   private boolean movingUp = false;
   private boolean movingDown = false;
   
-public Skeleton(int x, int y, int xa, int ya, Game game, Level level,String leveltxt) {
+  public Skeleton(int x, int y, int xa, int ya, Game game, Level level,String leveltxt) {
     super(x,y,xa,ya,game,level,leveltxt);
     
   }
