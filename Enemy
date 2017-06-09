@@ -21,16 +21,18 @@ public class Enemy
   protected int height = 32;
   protected Image sprite;
   protected boolean flipped;
-  private Game game;
-  private int xL = 45;
-  private int yL = 38;
+  protected Game game;
+  protected int xL = 45;
+  protected int yL = 38;
   Skeleton[] sList = new Skeleton[2];
   Ghost[] gList = new Ghost[3];
   Ghoul[] ghList = new Ghoul[3];
-  private int skeletonNumber = 0;
-  private int ghostNumber = 0;
-  private int ghoulNumber = 0;
- protected String enemytxt;
+  protected int skeletonNumber = 0;
+  protected int ghostNumber = 0;
+  protected int ghoulNumber = 0;
+  protected Level level;
+  protected String enemytxt;
+  
   
   private int[][] enemyLayout;
   
@@ -38,7 +40,7 @@ public class Enemy
   //these represent the current position of the gravedigger, the enemies will always try to go there
   protected int playerX = 0;
   protected int playerY = 0;
-
+  
   public Enemy(int x, int y,int xa,int ya, Game game,Level level, String enemytxt) 
   {
     this.x = x;
@@ -87,14 +89,14 @@ public class Enemy
   //updates the variables playerX and playerY which are used by the enemies to move toward the grave digger
   public void updateTarget(){
     //has to go through game
-   playerX = game.getPlayerX();
-   playerY = game.getPlayerY();
-   
- 
+    playerX = game.getPlayerX();
+    playerY = game.getPlayerY();
+    
+    
   }
   
   
-    public void move(){
+  public void move(){
     int dif = 0;
     
     //if the distance between the players x and enemies x is greater than the difference between the players y and enemies y
@@ -146,47 +148,47 @@ public class Enemy
       ya *= -1;
     
     /*
-    if((x%32 != 0) || (y)%32 !=0){
-      if(movingLeft){
-        xa = -1;
-        ya = 0;
-      }
-      if(movingRight){
-        xa = 1;
-        ya = 0;
-      }
-      if(movingUp){
-       ya = -1;
-       xa = 0;
-      }
-      if(movingDown){
-       ya = 1;
-       xa = 0;
-      }
-    }
-    else if((x%32 == 0) || (y)%32 ==0){
-      if(movingLeft){
-      movingLeft = false;
-      xa = 0;
-      ya = 0;
-      }
-      if(movingRight){
-      movingRight = false;
-      xa=0;
-      ya=0;
-      }
-      if(movingUp){
-      movingUp = false;
-      xa=0;
-      ya=0;
-      }
-      if(movingDown){
-      movingDown = false;
-      xa=0;
-      ya=0;
-      }
-    }
-    */
+     if((x%32 != 0) || (y)%32 !=0){
+     if(movingLeft){
+     xa = -1;
+     ya = 0;
+     }
+     if(movingRight){
+     xa = 1;
+     ya = 0;
+     }
+     if(movingUp){
+     ya = -1;
+     xa = 0;
+     }
+     if(movingDown){
+     ya = 1;
+     xa = 0;
+     }
+     }
+     else if((x%32 == 0) || (y)%32 ==0){
+     if(movingLeft){
+     movingLeft = false;
+     xa = 0;
+     ya = 0;
+     }
+     if(movingRight){
+     movingRight = false;
+     xa=0;
+     ya=0;
+     }
+     if(movingUp){
+     movingUp = false;
+     xa=0;
+     ya=0;
+     }
+     if(movingDown){
+     movingDown = false;
+     xa=0;
+     ya=0;
+     }
+     }
+     */
     
     
     x = x+xa;
@@ -195,13 +197,13 @@ public class Enemy
     
     
   }
+  
+  public void enemyReader() {
     
-    public void enemyReader() {
-      
-       x = 0;
+    x = 0;
     //sky ends after y value
     y = 64;
-    ffor(int i = 0; i < xL; i++){
+    for(int i = 0; i < xL; i++){
       for(int z = 0; z < yL; z++){
         if(enemyLayout[i][z] == 's'){
           sList[skeletonNumber] = new Skeleton(32*i,32*z,0,0,game,level,enemytxt);
@@ -221,27 +223,27 @@ public class Enemy
       y = 64;
     }
   }
-
-        
-    public Skeleton[] getSList()
-    {
-      return sList;
-    }
-    
-    public Ghost[] getGList()
-    {
-      return gList;
-    }
-    
-    public Ghoul[] getGhList()
-    {
-      return ghList;
-    }
-    
-    
+  
+  
+  public Skeleton[] getSList()
+  {
+    return sList;
+  }
+  
+  public Ghost[] getGList()
+  {
+    return gList;
+  }
+  
+  public Ghoul[] getGhList()
+  {
+    return ghList;
+  }
+  
+  
   public void paint(Graphics g) {
     Graphics2D g2 = (Graphics2D) g;
   }
-
-    
-  }
+  
+  
+}
