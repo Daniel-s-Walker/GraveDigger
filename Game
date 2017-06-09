@@ -117,9 +117,14 @@ public class Game extends JPanel
     e.enemyReader();
     //collectibles
     c1 = new Collectibles(0,0,this,collectiblestxt);
+    c1.collectiblesReader();
+    
     
     levelLoaded = true;
     System.out.println(leveltxt);
+    if(!menu.getMenuOn()){
+    setLevelOn(true);
+    }
   }
   
   //Increases level int, moving to next level
@@ -156,7 +161,6 @@ public class Game extends JPanel
       
       
       
-      c1.paint(g2d);
       
       for(Skeleton a:e.getSList())
       a.paint(g2d);
@@ -167,6 +171,8 @@ public class Game extends JPanel
       for(Ghoul a:e.getGhList())
       a.paint(g2d);
       
+      for(Collectibles2 a:c1.getCList())
+        a.paint(g2d);
       
     }
   }
@@ -183,32 +189,46 @@ public class Game extends JPanel
       g1.move();
       
       //enemy movement
-//        for(Skeleton b:e.getSList())
-//        {
-//          b.updateTarget();
-//          b.move();
-//        }
-//
-//        for(Ghost b:e.getGList())
+        for(Skeleton b:e.getSList())
+        {
+          b.updateTarget();
+          b.move();
+          g1.collision(b);
+        }
+
+        for(Ghost b:e.getGList())
       
-//        {
-//          b.updateTarget();
-//          b.move();
-//        }
-//
-//        for(Ghoul b:e.getGhList())
-//        {
-//          b.updateTarget();
-//          b.move();
-//        }
+        {
+          b.updateTarget();
+          b.move();
+          g1.collision(b);
+        }
+
+        for(Ghoul b:e.getGhList())
+        {
+          b.updateTarget();
+          b.move();
+          g1.collision(b);
+        }
       
+      for(Collectibles2 b:c1.getCList())
+      {
+        g1.coinCollision(b);
+      }
+        
+        
       //rock movement
       for(int i = 0; i<rocks.length;i++){
         rocks[i].rockFall();
-      }  
+      }
+      
+      if(g1.getDead()){
+       setLevelOn(false);
+       g1.setDead();
+       levelLoaded=false;
+      }
+      
     }
-    
-    
   }
   
   
