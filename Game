@@ -164,7 +164,7 @@ public class Game extends JPanel
       
       for(Skeleton a:e.getSList())
       a.paint(g2d);
-      
+     
       for(Ghost a:e.getGList())
       a.paint(g2d);
       
