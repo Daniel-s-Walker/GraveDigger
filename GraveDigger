@@ -32,6 +32,8 @@ public class GraveDigger
   private Game game;
   private Level level;
   private boolean isDead = false;
+  private boolean hasKey = false;
+  private int coins;
   
   
   public GraveDigger(boolean hasArmor, boolean hasWand,int x, int y, int xa, int ya, Game game, Level level)
@@ -221,6 +223,23 @@ public class GraveDigger
      }  
 }
   
+  public void coinCollision(Collectibles2 a) {
+    int dx = (x-a.x);
+     int dy = (y-a.y);  
+     if ((int)Math.sqrt(dx*dx+dy*dy)<32)
+     {
+if (a.getPickedUp() == false)
+{
+  a.setPickedUp();
+  coins += 10;
+  
+     }
+if (a.getIsKey()) {
+  hasKey = true;
+}
+     }
+  }
+  
   public boolean getDead() {
     return isDead;
   }
@@ -228,6 +247,12 @@ public class GraveDigger
   public void setDead() {
     isDead = false;
   }
+  
+  public void setHasKey() {
+    hasKey = true;
+  }
+  
+  public boolean levelComplete() {
+    return hasKey;
+  }
 } 
-  
-  
