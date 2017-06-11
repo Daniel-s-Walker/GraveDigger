@@ -12,25 +12,26 @@ import java.awt.Toolkit;
 
 
 public class Collectibles2 extends Collectibles
-  {
+{
   private Image collectibles;
-    private boolean isKey;
-    private boolean pickedUp = false;
+  private boolean isKey = false;
+  private boolean pickedUp = false;
   
   public Collectibles2(int x, int y,Game game, boolean isKey, String collectiblestxt) {
     super(x,y,game,collectiblestxt);
     if (isKey) collectibles = Toolkit.getDefaultToolkit().getImage("key.png");
     else collectibles = Toolkit.getDefaultToolkit().getImage("coinbag.png");
+    this.isKey = isKey;
   }
   
   
-public void paint(Graphics g){
+  public void paint(Graphics g){
     Graphics2D g2 = (Graphics2D) g; 
     if (pickedUp == false) g2.drawImage(collectibles, x,y-height,width,height, null); 
-
-   
-}
-
+    
+    
+  }
+  
   public boolean getPickedUp() {
     return pickedUp;
   }
