@@ -82,28 +82,24 @@ public class GraveDigger
       ya = 0;
       movingUp = false;
       movingDownFinish =true;
-      System.out.println("rock up");
     }
     else if(movingDown && (level.getTile(xL, yL+1)== 'r')){
       xa = 0;
       ya = 0;
       movingDown = false;
       movingUpFinish=true;
-      System.out.println("rock down");
     }
     else if(movingRight && (level.getTile(xL+1, yL)== 'r')){
       xa = 0;
       ya = 0;
       movingRight = false;
       movingLeftFinish=true;
-      System.out.println("rock right");
     }
     else if(movingLeft && (level.getTile(xL-1, yL)== 'r')){
       xa = 0;
       ya = 0;
       movingLeft = false;
       movingRightFinish=true;
-      System.out.println("rock down");
     }
     
     else{
@@ -214,30 +210,31 @@ public class GraveDigger
   }
   
   public void collision(Enemy a)  {
-     int dx = (x-a.x) + (xa-a.xa);
-     int dy = (y-a.y) + (ya-a.ya);  
-     if ((int)Math.sqrt(dx*dx+dy*dy)<=32)
-     {
-
-     isDead = true;
-     }  
-}
+    int dx = (x-a.x) + (xa-a.xa);
+    int dy = (y-a.y) + (ya-a.ya);  
+    if ((int)Math.sqrt(dx*dx+dy*dy)<=32)
+    {
+      
+      isDead = true;
+    }  
+  }
   
   public void coinCollision(Collectibles2 a) {
     int dx = (x-a.x);
-     int dy = (y-a.y);  
-     if ((int)Math.sqrt(dx*dx+dy*dy)<32)
-     {
-if (a.getPickedUp() == false)
-{
-  a.setPickedUp();
-  coins += 10;
-  
-     }
-if (a.getIsKey()) {
-  hasKey = true;
-}
-     }
+    int dy = (y-a.y);  
+    if ((int)Math.sqrt(dx*dx+dy*dy)<32)
+    {
+      if (a.getIsKey()) {
+        hasKey = true;
+        System.out.println("yeehaw");
+      }
+      if (a.getPickedUp() == false)
+      {
+        a.setPickedUp();
+        coins += 10;
+        System.out.println(coins);
+      }
+    }
   }
   
   public boolean getDead() {
