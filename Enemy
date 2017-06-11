@@ -117,7 +117,7 @@ public class Enemy
   }
   
   
-   public void move(){
+  public void move(){
     difx = playerX - x;
     dify = playerY - y;
     
@@ -163,6 +163,8 @@ public class Enemy
     
   }
   
+  
+  
   public void enemyReader() {
     
     for(int i = 0; i < 42; i++){
@@ -170,7 +172,7 @@ public class Enemy
         if(enemyLayout[i][z] == 's'){
           skeletonNumber++;
         }
-        if(enemyLayout[i][z] == 'g'){
+        if(enemyLayout[i][z] == 'u'){
           ghostNumber++;
         }
         if(enemyLayout[i][z] == 'h'){
@@ -196,7 +198,7 @@ public class Enemy
           skeletonNumber2++;
           
         }
-        if(enemyLayout[i][z] == 'g'){
+        if(enemyLayout[i][z] == 'u'){
           gList[ghostNumber2] = new Ghost(32*(i-1),32*(z+3),0,0,game,level,enemytxt);
           ghostNumber2++;
         }
