@@ -35,3 +35,19 @@ X's represent area that is off screen - DO NOT change these!
 d's and g's represent tiles that are on screen - change these to create a new layout!
 
 THIS IS THE STANDARD LAYOUT FOR levelLayout, enemyLayout, and collectiblesLayout
+
+CHARS FOR EACH TEXT FILE
+
+LEVEL:
+g - grass
+d - dirt
+r - rock
+
+ENEMY
+s - skeleton
+h - ghoul 
+u - ghost
+
+COLLECTIBLES
+c - coins
+k - key
