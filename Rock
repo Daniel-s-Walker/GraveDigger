@@ -35,7 +35,7 @@ public class Rock {
   
   public void rockFall(){
     if(!rockGone){
-      if(level.getTile(xPos,yPos+1)=='d'||level.getTile(xPos,yPos+1)=='r'||level.getTile(xPos,yPos+1)=='g'){
+      if(level.getTile(xPos,yPos+1)=='d'||level.getTile(xPos,yPos+1)=='r'||level.getTile(xPos,yPos+1)=='g'||level.getTile(xPos,yPos+1)=='x'){
         rockTouch=true; 
       }
       else{
@@ -64,5 +64,3 @@ public class Rock {
     }
   }
 }
-
-
