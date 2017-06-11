@@ -121,9 +121,8 @@ public class Game extends JPanel
     
     
     levelLoaded = true;
-    System.out.println(leveltxt);
     if(!menu.getMenuOn()){
-    setLevelOn(true);
+      setLevelOn(true);
     }
   }
   
@@ -134,7 +133,7 @@ public class Game extends JPanel
   
   //changes levelLoaded to false, causing next level to load
   public void setLevelLoaded(){
-   levelLoaded = false; 
+    levelLoaded = false; 
   }
   
   
@@ -163,13 +162,13 @@ public class Game extends JPanel
       
       
       for(Skeleton a:e.getSList())
-      a.paint(g2d);
-     
+        a.paint(g2d);
+      
       for(Ghost a:e.getGList())
-      a.paint(g2d);
+        a.paint(g2d);
       
       for(Ghoul a:e.getGhList())
-      a.paint(g2d);
+        a.paint(g2d);
       
       for(Collectibles2 a:c1.getCList())
         a.paint(g2d);
@@ -189,45 +188,50 @@ public class Game extends JPanel
       g1.move();
       
       //enemy movement
-        for(Skeleton b:e.getSList())
-        {
-          b.updateTarget();
-          b.move();
-          g1.collision(b);
-        }
-
-        for(Ghost b:e.getGList())
+      for(Skeleton b:e.getSList())
+      {
+        b.updateTarget();
+        b.move();
+        //g1.collision(b);
+      }
       
-        {
-          b.updateTarget();
-          b.move();
-          g1.collision(b);
-        }
-
-        for(Ghoul b:e.getGhList())
-        {
-          b.updateTarget();
-          b.move();
-          g1.collision(b);
-        }
+      for(Ghost b:e.getGList())
+        
+      {
+        b.updateTarget();
+        b.move();
+        //g1.collision(b);
+      }
+      
+      for(Ghoul b:e.getGhList())
+      {
+        b.updateTarget();
+        b.move();
+        //g1.collision(b);
+      }
       
       for(Collectibles2 b:c1.getCList())
       {
         g1.coinCollision(b);
       }
-        
-        
+      
+      
       //rock movement
       for(int i = 0; i<rocks.length;i++){
         rocks[i].rockFall();
       }
       
       if(g1.getDead()){
-       setLevelOn(false);
-       g1.setDead();
-       levelLoaded=false;
+        setLevelOn(false);
+        g1.setDead();
+        levelLoaded=false;
       }
       
+      if(g1.levelComplete()){
+        setLevelOn(false);
+        setLevelInt();
+        levelLoaded=false;
+      }
     }
   }
   
