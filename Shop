@@ -12,13 +12,13 @@ import java.awt.Image;
 import java.awt.Toolkit;
 
 public class Shop extends JPanel{
-  private int armorCost = 10;
+  private int armorCost = 5;
   private int potionCost = 10;
-  private int wandCost = 10;
+  private int wandCost = 100;
   //contains how much gold the player has
-  private int tensGold = 9;
-  private int onesGold = 9;
-  private int totalGold = 99;
+  private int tensGold = 0;
+  private int onesGold = 0;
+  private int totalGold = 0;
   
   //these variables are for if the player has wand armor or a potion
   //they are what prevents them from buying more at the shop
