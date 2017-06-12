@@ -29,7 +29,7 @@ public class Shop extends JPanel{
   private Game game;
   
   //boolean which determines if the shop is painted or not. true means it is painted false means it is not.
-  private boolean shopOn = true;
+  private boolean shopOn = false;
   
   //the x of the white selection box around the items
   private int selectX = 450;
@@ -43,15 +43,12 @@ public class Shop extends JPanel{
   //shows which item is selected, 1 is armor 2 is potion, 3 is wand
   private int itemType = 1;
   
-  //height and width of window
-  private int width = 0;
-  private int height = 0;
   
   //shop takes a width and height value that should be the window size
-  public Shop(int width, int height, Game game){
+  public Shop(Game game){
     this.game = game;
-    this.width = width;
-    this.height = height;
+    totalGold = game.getCoins();
+
     try {
       shopImage = ImageIO.read(new File("shop.png"));
     } catch (IOException e) {
@@ -81,6 +78,7 @@ public class Shop extends JPanel{
       if (e.getKeyCode() == KeyEvent.VK_ESCAPE){
         
         setShop();
+        game.setLevelLoaded();
         
       }
       
@@ -207,3 +205,4 @@ public class Shop extends JPanel{
     
   }
 }
+
