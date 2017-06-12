@@ -16,11 +16,14 @@ public class Level{
   private int xL = 42;
   private int yL = 31;
   private int[][] levelLayout;
+  private Game game;
   
   private String leveltxt;
   
   
-  public Level(String leveltxt){
+  public Level(String leveltxt, Game game){
+    this.game = game;
+
     levelLayout = new int[xL][yL];
     this.leveltxt = leveltxt;
     try
@@ -88,6 +91,7 @@ public class Level{
       x = x + width;
       y = 64;
     }
+    
   }
   
   public int getTile(int x,int y){
