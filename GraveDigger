@@ -231,7 +231,7 @@ public class GraveDigger
       if (a.getPickedUp() == false)
       {
         a.setPickedUp();
-        coins += 10;
+        coins += 1;
         System.out.println(coins);
       }
     }
@@ -252,4 +252,13 @@ public class GraveDigger
   public boolean levelComplete() {
     return hasKey;
   }
+  
+  public int getCoins() {
+    return coins;
+  }
+  
+  public void setCoins(int a) {
+    coins -= a;
+  }
 } 
+
